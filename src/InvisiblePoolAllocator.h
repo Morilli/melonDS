@@ -1,3 +1,6 @@
+#ifndef INVISIBLEPOOLALLOCATOR_H
+#define INVISIBLEPOOLALLOCATOR_H
+
 #include <cstddef>
 #include <new>
 
@@ -39,3 +42,5 @@ struct InvisiblePoolAllocator
 		invisible_pool_free(static_cast<void*>(p));
 	}
 };
+
+#endif
