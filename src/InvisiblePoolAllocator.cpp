@@ -56,6 +56,16 @@ static invisible_mem_header_t* get_invisible_mem_from_pool(std::size_t num_quant
 	return invisible_free_p;
 }
 
+bool invisible_pool_init()
+{
+	if (invisible_pool == nullptr)
+	{
+		invisible_pool = alloc_invisible<std::uint8_t>(INVISIBLE_POOL_SIZE);
+	}
+
+	return invisible_pool != nullptr;
+}
+
 // Allocations are done in 'quantas' of header size.
 // The search for a free block of adequate size begins at the point 'invisible_free_p' where the last block was found.
 // If a too-big block is found, it is split and the tail is returned (this way the header of the original needs only to have its size adjusted).
@@ -64,11 +74,7 @@ void* invisible_pool_alloc(std::size_t num_bytes)
 {
 	if (invisible_pool == nullptr)
 	{
-		invisible_pool = alloc_invisible<std::uint8_t>(INVISIBLE_POOL_SIZE);
-		if (invisible_pool == nullptr)
-		{
-			return nullptr;
-		}
+		return nullptr;
 	}
 
 	invisible_mem_header_t* p;

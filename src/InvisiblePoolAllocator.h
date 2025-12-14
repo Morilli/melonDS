@@ -4,6 +4,7 @@
 // 128MiB is hopefully enough?
 #define INVISIBLE_POOL_SIZE (128 * 1024 * 1024)
 
+bool invisible_pool_init();
 void* invisible_pool_alloc(std::size_t num_bytes);
 void invisible_pool_free(void* ap);
 
